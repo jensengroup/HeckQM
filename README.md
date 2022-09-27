@@ -16,7 +16,7 @@ For the installation, we recommend using `conda` to get all the necessary depend
 
 Then download the binaries of xtb version 6.4.1:
 
-    mkdir dep; cd dep; wget https://github.com/grimme-lab/xtb/releases/download/v6.4.1/xtb-6.4.1.tar.xz; tar -xvf ./xtb-6.4.1.tar.xz; cd ..
+    mkdir dep; cd dep; wget https://github.com/grimme-lab/xtb/releases/download/v6.4.1/xtb-6.4.1-linux-x86_64.tar.xz; tar -xvf ./xtb-6.4.1-linux-x86_64.tar.xz; cd ..
 
 
 Furthermore, ORCA version 5.0.1 must be installed following the instructions found here: https://sites.google.com/site/orcainputlibrary/setting-up-orca
