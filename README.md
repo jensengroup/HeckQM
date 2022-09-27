@@ -1,6 +1,6 @@
 # What the Heck? - Automated regioselectivity calculations of palladium-catalyzed Heck reactions using quantum chemistry
 
-This repository contains code for running a quantum chemistry (QM)-based workflow that computes relative energies of intermediates in the Heck reaction that relate to the regioselective reaction outcome: branched, linear, or a mix of the two.
+This repository contains code for running a quantum chemistry (QM)-based workflow that computes relative energies of intermediates in the Heck reaction that relate to the regioselective reaction outcome: branched (𝛂), linear (𝛃), or a mix of the two.
 The method applies to cross-couplings of monosubstituted alkenes with aryl/vinyl halides (Cl, Br, or I) or triflates in the presence of a base and a palladium (Pd) catalyst with monodentate triphenylphosphine ligands to form branched (𝛂) and/or linear (𝛃) disubstituted alkenes.
 In fact, the workflow can also handle intramolecular Heck reactions of similar type as described above.
 
