@@ -37,11 +37,12 @@ import heckqm.molecule_formats as molfmt
 import heckqm.run_xTB as run_xTB
 import heckqm.run_orca as run_orca
 
-# CPU usage
-# -- Note, that ORCA is set to use 4 cpu cores and 2 conformers are running in parallel
-#    resulting in a total of 8 cpu cores.
+# CPU and memory usage
+# -- Note, that ORCA is set to use 8 cpu cores and 2 conformers are running in parallel
+#    resulting in a total of 16 cpu cores per task. Memory per ORCA calculation is set to (mem_gb/2)*1000 MB.
 num_cpu_parallel = 2 # number of parallel jobs.
-num_cpu_single = 4 # number of cpus per job
+num_cpu_single = 8 # number of cpus per job.
+mem_gb = 40 # total memory usage per task.
 
 
 def confsearch_xTB(conf_complex_mols, template, conf_names, chrg=0, spin=0, method='ff', solvent='', conf_cutoff=50, contrained=True, precalc_path=None):
@@ -142,7 +143,7 @@ def calculateEnergy(args):
     final_conf_complex_mols = []
     for conf_name, conf_complex_mol, conf_path, conf_energy in zip(conf_names, conf_complex_mols, conf_paths, conf_energies):
         if conf_energy != 60000.0: # do single point calculations on all unique conformers
-            conf_energy = run_orca.run_orca('xtbopt.xyz', chrg, os.path.join("/".join(conf_path.split("/")[:-2]), 'full_opt', conf_name+'_full_opt'), ncores=num_cpu_single, mem=10000)
+            conf_energy = run_orca.run_orca('xtbopt.xyz', chrg, os.path.join("/".join(conf_path.split("/")[:-2]), 'full_opt', conf_name+'_full_opt'), ncores=num_cpu_single, mem=(int(mem_gb)/2)*1000)
         final_conf_energies.append(conf_energy)
         final_conf_complex_mols.append(conf_complex_mol)
     
@@ -150,7 +151,7 @@ def calculateEnergy(args):
     minE_index = np.argmin(final_conf_energies)
     best_conf_complex_mol = final_conf_complex_mols[minE_index]
     best_conf_energy = final_conf_energies[minE_index] # uncomment when doing single point calculations on all unique conformers
-    # best_conf_energy = run_orca.run_orca('xtbopt.xyz', chrg, os.path.join(os.getcwd(), 'calc', conf_names[minE_index]+'_full_opt'), ncores=num_cpu_single, mem=20000) # comment when doing single point calculations on all unique conformers, otherwise this runs a Orca single point calculation on the lowest xTB energy conformer
+    # best_conf_energy = run_orca.run_orca('xtbopt.xyz', chrg, os.path.join(os.getcwd(), 'calc', conf_names[minE_index]+'_full_opt'), ncores=num_cpu_single, mem=(int(mem_gb)/2)*1000) # comment when doing single point calculations on all unique conformers, otherwise this runs a Orca single point calculation on the lowest xTB energy conformer
 
     # Remove isotope infomation
     best_conf_complex_mol = MolStandardize.rdMolStandardize.IsotopeParent(best_conf_complex_mol, skipStandardize=True)
@@ -387,14 +388,15 @@ if __name__ == "__main__":
     import pandas as pd
     import submitit
 
-    df = pd.read_pickle('data_cabri/data_cabri.pkl') #Cabri dataset
     # df = pd.read_pickle('data_curation/df_all_data_curated.pkl') #all curated data
+    df = pd.read_pickle('data_cabri/data_cabri.pkl') #Cabri dataset
+    df = df.tail(1)
 
     executor = submitit.AutoExecutor(folder="submitit_heckqm")
     executor.update_parameters(
         name="heckQM",
         cpus_per_task=int(num_cpu_parallel*num_cpu_single),
-        mem_gb=20, # remember to change this for the ORCA calculations!
+        mem_gb=int(mem_gb),
         timeout_min=6000,
         slurm_partition="kemi1",
         slurm_array_parallelism=50,

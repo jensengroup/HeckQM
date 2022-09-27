@@ -34,8 +34,8 @@ lg.setLevel(RDLogger.CRITICAL)
 from heckQM import run_heck_reaction
 
 # CPU usage
-# -- change this in heckQM.py. Note, that ORCA is set to use 4 cpu cores and 2 conformers are running in parallel
-#    resulting in a total of 8 cpu cores.
+# -- change this in heckQM.py. Note, that ORCA is set to use 8 cpu cores and 2 conformers are running in parallel
+#    resulting in a total of 16 cpu cores per task. Memory per ORCA calculation is set to (mem_gb/2)*1000 MB.
 
 
 
@@ -99,7 +99,7 @@ if __name__ == "__main__":
     executor = submitit.AutoExecutor(folder="submitit_heckqm_cli")
     executor.update_parameters(
         name="heckQM",
-        cpus_per_task=24,
+        cpus_per_task=16,
         mem_gb=40,
         timeout_min=6000,
         slurm_partition="kemi1",
@@ -115,10 +115,8 @@ if __name__ == "__main__":
     # Load halogen containing molecule
     if args.halogen_smi:
         halogen_mol = Chem.AddHs(Chem.MolFromSmiles(args.halogen_smi))
-        cddd_embedding = cddd_server.smiles_to_cddd([Chem.MolToSmiles(alkene_mol), Chem.MolToSmiles(halogen_mol)])
     else:
         halogen_mol = None
-        cddd_embedding = cddd_server.smiles_to_cddd([Chem.MolToSmiles(alkene_mol), Chem.MolToSmiles(alkene_mol)])
     ### END ###
     
 
