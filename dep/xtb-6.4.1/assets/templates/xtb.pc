@@ -1,9 +1,0 @@
-prefix=@prefix@
-libdir=${prefix}/@libdir@
-includedir=${prefix}/@includedir@
-
-Name: @name@
-Description: @description@
-Version: @version@
-Libs: -L${libdir} -l@name@
-Cflags: -I${includedir}
