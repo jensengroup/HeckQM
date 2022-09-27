@@ -7,7 +7,7 @@ Furthermore, we provide supporting material for data extraction and preparation 
 
 ## Install
 
-For the installation, we recommend using `conda` to get the all necessary dependencies:
+For the installation, we recommend using `conda` to get all the necessary dependencies:
 
     conda env create -f environment.yml && conda activate heckqm
 
