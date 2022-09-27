@@ -1,4 +1,4 @@
-name: hecksqm
+name: heckqm
 channels:
   - conda-forge
   - defaults
@@ -15,7 +15,7 @@ dependencies:
   - lightgbm=3.1.1
   - ase=3.22.1
   - submitit=1.2.1
-  - openbabel=3.1.1
+  - openbabel=3.1.0
   - requests=2.27.1
   - py3dmol
   - ipykernel
