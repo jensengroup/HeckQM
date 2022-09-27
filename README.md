@@ -32,7 +32,7 @@ An example of usage via CLI command:
 
     # Create predictions for an intermolecular Heck reaction:
 
-    python heckQM_CLI.py --alkene_smi 'C=C' --halogen_smi 'c1ccccc1Br' --name 'test' &
+    python heckQM_CLI.py --alkene_smi 'C=CC' --halogen_smi 'c1ccccc1Cl' --name 'test' &
     
 
 The calculations are now saved in a "calc" folder and a graphical output of the results (in .html format) are found in a "results" folder.
