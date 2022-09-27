@@ -28,7 +28,7 @@ OBS!
 
 ## Usage
 
-An example of usage via CLI command:
+An example of usage via CLI command (takes ~13 min. on 2x8 CPU cores):
 
     # Create predictions for an intermolecular Heck reaction:
 
