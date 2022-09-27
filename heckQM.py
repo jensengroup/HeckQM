@@ -33,9 +33,9 @@ from rdkit import RDLogger
 lg = RDLogger.logger()
 lg.setLevel(RDLogger.CRITICAL)
 
-import hecksqm.molecule_formats as molfmt
-import hecksqm.run_xTB as run_xTB
-import hecksqm.run_orca as run_orca
+import heckqm.molecule_formats as molfmt
+import heckqm.run_xTB as run_xTB
+import heckqm.run_orca as run_orca
 
 # CPU usage
 # -- Note, that ORCA is set to use 4 cpu cores and 2 conformers are running in parallel
@@ -106,6 +106,8 @@ def calculateEnergy(args):
 
     # Obtain product by deattaching it from the catalyst
     product = molfmt.run_rxn((complex_mol,), '[13#6:4][#6:1]([#1:3])[#6:2][#46:10]>>[13#6:4][#6:1]=[#6:2].[#46:10]')[0]
+    chrg = chrg + Chem.GetFormalCharge(product) # checking and adding formal charge to "chrg"
+    # OBS! Spin is hardcoded to zero!
 
     # Get number of conformers
     rot_bond = Chem.rdMolDescriptors.CalcNumRotatableBonds(product)
@@ -221,10 +223,10 @@ def run_heck_reaction(alkene_mol, halogen_mol, name='mol', chrg=0, neutral_path=
     ### Select the correct templates and reaction SMARTS depending on chosen the reaction path ###
     if neutral_path:
         # NEUTRAL REACTION TEMPLATES
-        template_alpha = Chem.SDMolSupplier('hecksqm/template_cat_iso/first_temp_cat_31.sdf', removeHs=False, sanitize=True)[0] # alpha / branched (alkene mol associate trans to the phosphine)
-        template_beta = Chem.SDMolSupplier('hecksqm/template_cat_iso/first_temp_cat_29.sdf', removeHs=False, sanitize=True)[0] # beta / linear (alkene mol associate trans to the phosphine)
-        template_alpha_th = Chem.SDMolSupplier('hecksqm/template_cat_iso/first_temp_cat_37.sdf', removeHs=False, sanitize=True)[0] # alpha / branched (alkene mol associate trans to the halide)
-        template_beta_th = Chem.SDMolSupplier('hecksqm/template_cat_iso/first_temp_cat_35.sdf', removeHs=False, sanitize=True)[0] # beta / linear (alkene mol associate trans to the halide)
+        template_alpha = Chem.SDMolSupplier('heckqm/template_cat_iso/first_temp_cat_31.sdf', removeHs=False, sanitize=True)[0] # alpha / branched (alkene mol associate trans to the phosphine)
+        template_beta = Chem.SDMolSupplier('heckqm/template_cat_iso/first_temp_cat_29.sdf', removeHs=False, sanitize=True)[0] # beta / linear (alkene mol associate trans to the phosphine)
+        template_alpha_th = Chem.SDMolSupplier('heckqm/template_cat_iso/first_temp_cat_37.sdf', removeHs=False, sanitize=True)[0] # alpha / branched (alkene mol associate trans to the halide)
+        template_beta_th = Chem.SDMolSupplier('heckqm/template_cat_iso/first_temp_cat_35.sdf', removeHs=False, sanitize=True)[0] # beta / linear (alkene mol associate trans to the halide)
         templates = [template_alpha, template_beta, template_alpha_th, template_beta_th]
         template_names = ['4', '3', '2', '1'] #['31', '29', '37', '35']
 
@@ -239,8 +241,8 @@ def run_heck_reaction(alkene_mol, halogen_mol, name='mol', chrg=0, neutral_path=
             smarts_list = [intra_one_alpha_complex, intra_one_beta_complex, intra_one_alpha_complex, intra_one_beta_complex]
     else:
         # CATIONIC REACTION TEMPLATES
-        template_alpha = Chem.SDMolSupplier('hecksqm/template_cat_iso/first_temp_cat_17.sdf', removeHs=False, sanitize=True)[0] # alpha / branched
-        template_beta = Chem.SDMolSupplier('hecksqm/template_cat_iso/first_temp_cat_09.sdf', removeHs=False, sanitize=True)[0] # beta / linear
+        template_alpha = Chem.SDMolSupplier('heckqm/template_cat_iso/first_temp_cat_17.sdf', removeHs=False, sanitize=True)[0] # alpha / branched
+        template_beta = Chem.SDMolSupplier('heckqm/template_cat_iso/first_temp_cat_09.sdf', removeHs=False, sanitize=True)[0] # beta / linear
         templates = [template_alpha, template_beta]
         template_names = ['5', '6'] #['17', '09']
 
@@ -363,7 +365,7 @@ def control_calcs(df):
             df.at[idx, 'products_neu'] = products_neu
             df.at[idx, 'legends_neu'] = legends_neu
         except Exception as e:
-            print(f'WARNING! HeckSQM Neutral failed for {rxn_id}')
+            print(f'WARNING! HeckQM Neutral failed for {rxn_id}')
             print(e)
 
         # Cationic reaction path
@@ -374,7 +376,7 @@ def control_calcs(df):
             df.at[idx, 'products_cat'] = products_cat
             df.at[idx, 'legends_cat'] = legends_cat
         except Exception as e:
-            print(f'WARNING! HeckSQM Cationic failed for {rxn_id}')
+            print(f'WARNING! HeckQM Cationic failed for {rxn_id}')
             print(e)
 
     return df
@@ -385,13 +387,12 @@ if __name__ == "__main__":
     import pandas as pd
     import submitit
 
-    # df = pd.read_pickle('data_cabri/data_cabri.pkl') #Cabri dataset
-    #df = pd.read_pickle('data_curation/df_all_data_curated.pkl') #all curated data
-    df = pd.read_pickle('data_curation/missing_calcs.pkl') #missing rxns to calculate
+    df = pd.read_pickle('data_cabri/data_cabri.pkl') #Cabri dataset
+    # df = pd.read_pickle('data_curation/df_all_data_curated.pkl') #all curated data
 
-    executor = submitit.AutoExecutor(folder="submitit_hecksqm")
+    executor = submitit.AutoExecutor(folder="submitit_heckqm")
     executor.update_parameters(
-        name="heckSQM",
+        name="heckQM",
         cpus_per_task=int(num_cpu_parallel*num_cpu_single),
         mem_gb=20, # remember to change this for the ORCA calculations!
         timeout_min=6000,

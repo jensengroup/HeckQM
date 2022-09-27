@@ -28,7 +28,7 @@ import subprocess
 from rdkit import Chem
 from ase.units import Hartree, mol, kcal, kJ
 
-import hecksqm.molecule_formats as molfmt
+import heckqm.molecule_formats as molfmt
 
 # xTB path and calc setup
 path = os.getcwd()
@@ -37,10 +37,10 @@ XTBPATH = os.path.join(path, 'dep/xtb-6.4.1/share/xtb')
 MANPATH = os.path.join(path, 'dep/xtb-6.4.1/share/man')
 LD_LIBRARY_PATH = os.path.join(path, 'dep/xtb-6.4.1/lib')
 
-# XTBHOME = '/groups/kemi/ree/PhD/applications/HeckPredictor/dep/xtb-6.4.1'
-# XTBPATH = '/groups/kemi/ree/PhD/applications/HeckPredictor/dep/xtb-6.4.1/share/xtb'
-# MANPATH = '/groups/kemi/ree/PhD/applications/HeckPredictor/dep/xtb-6.4.1/share/man'
-# LD_LIBRARY_PATH = '/groups/kemi/ree/PhD/applications/HeckPredictor/dep/xtb-6.4.1/lib'
+# XTBHOME = '/groups/kemi/ree/PhD/applications/HeckQM/dep/xtb-6.4.1'
+# XTBPATH = '/groups/kemi/ree/PhD/applications/HeckQM/dep/xtb-6.4.1/share/xtb'
+# MANPATH = '/groups/kemi/ree/PhD/applications/HeckQM/dep/xtb-6.4.1/share/man'
+# LD_LIBRARY_PATH = '/groups/kemi/ree/PhD/applications/HeckQM/dep/xtb-6.4.1/lib'
 
 OMP_NUM_THREADS = '1'
 MKL_NUM_THREADS = '1'
