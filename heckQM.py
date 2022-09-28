@@ -390,7 +390,7 @@ if __name__ == "__main__":
 
     # df = pd.read_pickle('data_curation/df_all_data_curated.pkl') #all curated data
     df = pd.read_pickle('data/cabri/data_cabri.pkl') #Cabri dataset
-    df = df.tail(1)
+    df = df[df['Reaction ID'] == '3d']
 
     executor = submitit.AutoExecutor(folder="submitit_heckqm")
     executor.update_parameters(
