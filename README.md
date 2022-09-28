@@ -35,17 +35,23 @@ OBS!
 An example of usage via CLI command (takes ~10 min. on 2x16 CPU cores):
 
     # Create predictions for an intermolecular Heck reaction:
-
     python heckQM_CLI.py --alkene_smi 'C=CC' --halogen_smi 'c1ccccc1Cl' --name 'test' &
     
 
 The calculations are now saved in a "calc" folder and a graphical output of the results (in .html format) are found in a "results" folder.
 The graphical output presents the user with results for the two different reaction pathways (neutral and cationic), and shows the potential products in order of increasing energies of the post-insertion complexes.
 
+An example of using HeckQM on a dataframe (takes ~20 min. on 16 CPU cores):
+
+    # Create predictions for "3d" from the Cabri dataset (data/cabri/data_cabri.pkl):
+    python heckQM.py
+
+The calculations are now saved in a "calc" folder, and a dataframe containing the results are found in "submitit_heckqm/*_result.pkl"
+
 
 ## Data Extraction
 
-The dataset cannot be shared directly due to licensing restrictions.
+The Cabri dataset is available under "data/cabri/data_cabri.pkl", however the Reaxys dataset cannot be shared directly due to licensing restrictions.
 Fortunately, it can easily be extracted from Reaxys via a single Reaxys query and a list of Reaction IDs separated by semicolons by following these instructions:
 
   1. Go to the “Query builder” tab in Reaxys.
@@ -55,7 +61,7 @@ Fortunately, it can easily be extracted from Reaxys via a single Reaxys query an
   5. Paste the provided list of Reaction IDs into the input field.
   6. Clicking on the “Reactions” button will redirect the user to the result page with all the reactions corresponding to Reaction IDs that have been provided.
 
-Otherwise follow the procedure provided in "data_curation/info.txt".
+Otherwise follow the procedure provided in "data/reaxys/curation/info.md".
 
 
 ## Citation 
