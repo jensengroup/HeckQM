@@ -6,8 +6,9 @@ In fact, the workflow can also handle intramolecular Heck reactions of similar t
 
 Furthermore, we provide supporting material for data extraction and preparation used in the design and testing of the workflow.
 
-
-<img src="./docs/heckqm_overview.png" alt="overview" width="800">
+<p align="center">
+    <img src="./docs/heckqm_overview.png" alt="overview" width="700">
+</p>
 
 
 ## Install
