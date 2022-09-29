@@ -388,7 +388,7 @@ if __name__ == "__main__":
     import pandas as pd
     import submitit
 
-    # df = pd.read_pickle('data_curation/df_all_data_curated.pkl') #all curated data
+    # df = pd.read_pickle('data/reaxys/intermolecular_data.pkl') #Reaxys dataset
     df = pd.read_pickle('data/cabri/data_cabri.pkl') #Cabri dataset
     df = df[df['Reaction ID'] == '3d']
 
