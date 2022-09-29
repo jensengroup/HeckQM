@@ -61,7 +61,7 @@ Fortunately, it can easily be extracted from Reaxys via a single Reaxys query an
   5. Paste the provided list of Reaction IDs into the input field.
   6. Clicking on the “Reactions” button will redirect the user to the result page with all the reactions corresponding to Reaction IDs that have been provided.
 
-Otherwise follow the procedure provided in "data/reaxys/curation/info.md".
+Otherwise follow the procedure provided in "data/reaxys/curation/README.md".
 
 
 ## Citation 
