@@ -66,7 +66,7 @@ Otherwise follow the procedure provided in "data/reaxys/curation/info.md".
 
 ## Citation 
 
-Our work is published in [xxx](http://doi.org), where more information is available. 
+Our work is online as a preprint on [ChemRxiv](http://doi.org/10.26434/chemrxiv-2022-9pslv), where more information is available. 
 
 ```
 @article{ree2022heckqm,
