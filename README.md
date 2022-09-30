@@ -70,13 +70,11 @@ Our work is online as a preprint on [ChemRxiv](http://doi.org/10.26434/chemrxiv-
 
 ```
 @article{ree2022heckqm,
-  title={What the Heck? - Automated regioselectivity calculations of palladium-catalyzed Heck reactions using quantum chemistry},
-  author={Ree, Nicolai and Göller, Andreas H and Jensen, Jan H},
-  journal={},
-  volume={},
-  number={},
-  pages={},
-  year={2022},
-  publisher={}
+  doi = {10.26434/chemrxiv-2022-9pslv},
+  url = {https://doi.org/10.26434/chemrxiv-2022-9pslv},
+  year = {2022},
+  month = sep,
+  author = {Nicolai Ree and Andreas H. G\"{o}ller and Jan H. Jensen},
+  title = {What the Heck? {\textendash} Automated regioselectivity calculations of palladium-catalyzed Heckreactions using quantum chemistry}
 }
 ```
