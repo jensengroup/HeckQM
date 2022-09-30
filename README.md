@@ -11,7 +11,7 @@ Furthermore, we provide supporting material for data extraction and preparation 
 </p>
 
 
-## Install
+## Installation
 
 For the installation, we recommend using `conda` to get all the necessary dependencies:
 
