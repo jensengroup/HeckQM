@@ -66,15 +66,17 @@ Otherwise follow the procedure provided in "data/reaxys/curation/README.md".
 
 ## Citation 
 
-Our work is online as a preprint on [ChemRxiv](http://doi.org/10.26434/chemrxiv-2022-9pslv), where more information is available. 
+Our work is online and open access on [ACS Omega](https://doi.org/10.1021/acsomega.2c06378), where more information is available. 
 
 ```
 @article{ree2022heckqm,
-  doi = {10.26434/chemrxiv-2022-9pslv},
-  url = {https://doi.org/10.26434/chemrxiv-2022-9pslv},
+  doi = {10.1021/acsomega.2c06378},
+  url = {https://doi.org/10.1021/acsomega.2c06378},
   year = {2022},
-  month = sep,
+  month = dec,
+  publisher = {American Chemical Society ({ACS})},
   author = {Nicolai Ree and Andreas H. G\"{o}ller and Jan H. Jensen},
-  title = {What the Heck? {\textendash} Automated regioselectivity calculations of palladium-catalyzed Heckreactions using quantum chemistry}
+  title = {What the Heck? {\textendash} Automated Regioselectivity Calculations of Palladium-Catalyzed Heck Reactions Using Quantum Chemistry},
+  journal = {{ACS} Omega}
 }
 ```
