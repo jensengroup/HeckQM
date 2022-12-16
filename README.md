@@ -75,6 +75,9 @@ Our work is online and open access on [ACS Omega](https://doi.org/10.1021/acsome
   year = {2022},
   month = dec,
   publisher = {American Chemical Society ({ACS})},
+  volume = {7},
+  number = {49},
+  pages = {45617--45623},
   author = {Nicolai Ree and Andreas H. G\"{o}ller and Jan H. Jensen},
   title = {What the Heck? {\textendash} Automated Regioselectivity Calculations of Palladium-Catalyzed Heck Reactions Using Quantum Chemistry},
   journal = {{ACS} Omega}
